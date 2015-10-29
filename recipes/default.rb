@@ -24,7 +24,7 @@ get_java_home.run_command
 
 java_home = get_java_home.stdout
 
-Chef::Log.info("JAVA_HOME #{java_home} #{get_java_home.stdout}" )
+Chef::Log.info("JAVA_HOME #{get_java_home}")
 
 directory '/usr/java' do
 end
