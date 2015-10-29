@@ -23,6 +23,8 @@ get_java_home = Mixlib::ShellOut.new('$(readlink -f $(dirname $(readlink -f $(wh
 
 java_home = get_java_home.stdout
 
+Chef::Log.info("JAVA_HOME #{java_home}")
+
 directory '/usr/java' do
 end
 
