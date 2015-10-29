@@ -26,7 +26,7 @@ end
 
 link '/usr/java/bin' do
   to '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.45-28.b13.el6_6.x86_64/jre/bin'
-  link_type :soft
+  link_type :symbolic
 end
 
 include_recipe 'pivotal_repo::default'
