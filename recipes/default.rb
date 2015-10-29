@@ -19,7 +19,9 @@
 
 yum_package 'java-openjdk'
 
-java_home = Mixlib::ShellOut.new('$(readlink -f $(dirname $(readlink -f $(which java) ))/../)')
+get_java_home = Mixlib::ShellOut.new('$(readlink -f $(dirname $(readlink -f $(which java) ))/../)')
+
+java_home = get_java_home.stdout
 
 directory '/usr/java' do
 end
