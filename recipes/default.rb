@@ -17,10 +17,22 @@
 # limitations under the License.
 #
 
+package ['java'] do
+  action :install
+end
+
+directory '/usr/java' do
+end
+
+link '/usr/java/bin' do
+  to '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.45-28.b13.el6_6.x86_64/jre/bin'
+  link_type :soft
+end
+
 include_recipe 'pivotal_repo::default'
 
 tcruntime_instance 'tcruntime-8081' do
-  java_home '/usr/java'
+  java_home '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.45-28.b13.el6_6.x86_64/jre'
   properties [{ 'bio.http.port' => '8081' }, { 'bio.httpS.port' => '8444' }, { 'base.jmx.port' => '6970' }]
   templates ['bio', 'bio-ssl']
 end
