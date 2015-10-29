@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-yum_package ['java']
+yum_package 'java'
 
 directory '/usr/java' do
 end
