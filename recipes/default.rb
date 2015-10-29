@@ -16,3 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+tcruntime_instance 'tcruntime-8081' do
+  java_home '/usr/java'
+  properties [{ 'bio.http.port' => '8081' }, { 'bio.httpS.port' => '8444' }, { 'base.jmx.port' => '6970' }]
+  templates ['bio', 'bio-ssl']
+end
