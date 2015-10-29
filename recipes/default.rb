@@ -20,10 +20,11 @@
 yum_package 'java-openjdk'
 
 get_java_home = Mixlib::ShellOut.new('$(readlink -f $(dirname $(readlink -f $(which java) ))/../)')
+get_java_home.run_command
 
 java_home = get_java_home.stdout
 
-Chef::Log.info("JAVA_HOME #{java_home}")
+Chef::Log.info("JAVA_HOME #{java_home} #{get_java_home.stdout}" )
 
 directory '/usr/java' do
 end
