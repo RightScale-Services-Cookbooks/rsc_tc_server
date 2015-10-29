@@ -19,25 +19,22 @@
 
 yum_package 'java-openjdk'
 
-get_java_home = Mixlib::ShellOut.new('$(readlink -f $(dirname $(readlink -f $(which java) ))/../)')
-get_java_home.run_command
-
-java_home = get_java_home.stdout
-
-Chef::Log.info("JAVA_HOME #{get_java_home}")
+# find java_home
+# get_java_home = Mixlib::ShellOut.new('$(readlink -f $(dirname $(readlink -f $(which java) ))/../)')
+# get_java_home.run_command
 
 directory '/usr/java' do
 end
 
 link '/usr/java/bin' do
-  to "#{java_home}/bin"
+  to '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.45-28.b13.el6_6.x86_64/jre/bin'
   link_type :symbolic
 end
 
 include_recipe 'pivotal_repo::default'
 
 tcruntime_instance 'tcruntime-8081' do
-  java_home "#{java_home}"
+  java_home '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.45-28.b13.el6_6.x86_64/jre'
   properties [{ 'bio.http.port' => '8081' }, { 'bio.httpS.port' => '8444' }, { 'base.jmx.port' => '6970' }]
   templates ['bio', 'bio-ssl']
 end
