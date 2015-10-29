@@ -17,20 +17,22 @@
 # limitations under the License.
 #
 
-yum_package 'java'
+yum_package 'java-openjdk'
+
+java_home = Mixlib::ShellOut.new('$(readlink -f $(dirname $(readlink -f $(which java) ))/../)')
 
 directory '/usr/java' do
 end
 
 link '/usr/java/bin' do
-  to '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.45-28.b13.el6_6.x86_64/jre/bin'
+  to "#{java_home}/bin"
   link_type :symbolic
 end
 
 include_recipe 'pivotal_repo::default'
 
 tcruntime_instance 'tcruntime-8081' do
-  java_home '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.45-28.b13.el6_6.x86_64/jre'
+  java_home "#{java_home}"
   properties [{ 'bio.http.port' => '8081' }, { 'bio.httpS.port' => '8444' }, { 'base.jmx.port' => '6970' }]
   templates ['bio', 'bio-ssl']
 end
