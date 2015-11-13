@@ -2,7 +2,7 @@
 # Cookbook Name:: rsc_tc_server
 # Recipe:: default
 #
-# Copyright (C) 2014 RightScale Inc
+# Copyright (C) 2015 RightScale Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,4 +37,5 @@ tcruntime_instance 'tcruntime-8081' do
   java_home '/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.45-28.b13.el6_6.x86_64/jre'
   properties [{ 'bio.http.port' => '8081' }, { 'bio.httpS.port' => '8444' }, { 'base.jmx.port' => '6970' }]
   templates ['bio', 'bio-ssl']
+  ignore_failure true
 end
