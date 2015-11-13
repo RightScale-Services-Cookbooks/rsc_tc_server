@@ -9,5 +9,7 @@ version          '0.1.0'
 depends 'pivotal_repo'
 depends 'pivotal_tcserver'
 depends 'marker'
+depends 'liferay'
 
 recipe 'rsc_tc_server::default', 'Installs and configures Pivotal TC Server'
+recipe 'rsc_tc_server::install_liferay', 'Installs and configures software necessary for running a Liferay app.'
